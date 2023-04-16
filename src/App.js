@@ -29,6 +29,7 @@ function App() {
 const Space = styled.div`
   width: 100%;
   height: 100%;
+  overflow-x: scroll;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;

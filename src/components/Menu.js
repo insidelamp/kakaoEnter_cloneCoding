@@ -4,8 +4,19 @@ import { TbArrowUpRight } from "react-icons/tb";
 import { LogoImg } from "../Img/thumb-default.jpg";
 
 function Menu({ headerState, setHeaderState, scrollPosition }) {
+  const onHoverDisplay = () => {
+    setHeaderState(true);
+  };
+  const offHoverDisplay = () => {
+    setHeaderState(false);
+  };
   return (
-    <Space headerState={headerState} scrollPosition={scrollPosition}>
+    <Space
+      headerState={headerState}
+      scrollPosition={scrollPosition}
+      onMouseOver={onHoverDisplay}
+      onMouseLeave={offHoverDisplay}
+    >
       <MenuSpace>
         <MenuLogo>
           <Logo headerState={headerState} scrollPosition={scrollPosition}>
@@ -134,7 +145,7 @@ const MenuEmployment = styled.div`
 `;
 
 const EmploymentArrowSpace = styled.div`
-  background-color: white;
+  background-color: #ededed;
   width: 28px;
   height: 28px;
   border-radius: 50%;
