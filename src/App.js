@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
-import Contents from "./components/Contents";
+import MainBannerContents from "./components/MainBannerContents";
 import Menu from "./components/Menu";
+import InfinityContents from "./components/InfinityContents";
+import CarouseContents from "./components/CarouseContents";
 import Footer from "./components/Footer";
 
 import styled from "styled-components";
@@ -21,7 +23,9 @@ function App() {
         headerState={headerState}
         setHeaderState={setHeaderState}
       />
-      <Contents setHeaderState={setHeaderState} />
+      <MainBannerContents setHeaderState={setHeaderState} />
+      <InfinityContents />
+      <CarouseContents />
       <Footer />
     </Space>
   );
@@ -29,8 +33,6 @@ function App() {
 const Space = styled.div`
   width: 100%;
   height: 100%;
-  overflow-x: scroll;
-  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   margin: -3px 0px 0px -1px;

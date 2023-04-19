@@ -5,11 +5,11 @@ import bannerImg2 from "../Img/mainImg/kakaoenterMain2.png";
 import bannerImg3 from "../Img/mainImg/kakaoenterMain3.png";
 import bannerImg4 from "../Img/mainImg/kakaoenterMain4.png";
 import bannerImg5 from "../Img/mainImg/kakaoenterMain5.png";
-import { BsCaretRightFill, BsDot } from "react-icons/bs";
+import { BsCaretRightFill, BsDot, BsPlayFill } from "react-icons/bs";
 import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
 import { IoMdPause } from "react-icons/io";
 
-function Contents() {
+function MainBannerContents() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [palseState, setPalseState] = useState(false);
 
@@ -33,16 +33,6 @@ function Contents() {
   function handleSwipe(direction) {
     handleSlide(currentIndex + direction);
   }
-  useEffect(() => {
-    if (palseState === false) {
-      setTimeout(() => {
-        setCurrentIndex(currentIndex + 1);
-        if (currentIndex === bannerImgArr.length - 1) {
-          setCurrentIndex(0);
-        }
-      }, 1000);
-    }
-  }, [currentIndex]);
 
   function conentsDiv() {
     if (currentIndex === 0) {
@@ -93,7 +83,20 @@ function Contents() {
       );
     }
   }
+  const handlePalse = () => {
+    setPalseState(!palseState);
+  };
 
+  useEffect(() => {
+    if (palseState === false) {
+      setTimeout(() => {
+        setCurrentIndex(currentIndex + 1);
+        if (currentIndex === bannerImgArr.length - 1) {
+          setCurrentIndex(0);
+        }
+      }, 3000);
+    }
+  }, [currentIndex, palseState]);
   return (
     <ContentsSpace>
       <GrayBaground />
@@ -113,20 +116,24 @@ function Contents() {
           {conentsDiv(currentIndex)}
           <BannerBtn>자세히 보기</BannerBtn>
           <ImgBtnSpace>
-            <BtnSpace onClick={() => handleSwipe(-1)}>
+            <BtnSpace className="bothBtn" onClick={() => handleSwipe(-1)}>
               <LeftBtn />
             </BtnSpace>
             <ChangeSpace>
-              <ChangeNumber>1</ChangeNumber>
+              <ChangeNumber>{currentIndex + 1}</ChangeNumber>
               <ChangeNumber>
                 <BsDot />
               </ChangeNumber>
-              <ChangeNumber>4</ChangeNumber>
+              <ChangeNumber>{bannerImgArr.length}</ChangeNumber>
               <BtnSpace>
-                <ParseBtn />
+                {palseState ? (
+                  <PlayBtn onClick={handlePalse} />
+                ) : (
+                  <ParseBtn onClick={handlePalse} />
+                )}
               </BtnSpace>
             </ChangeSpace>
-            <BtnSpace onClick={() => handleSwipe(1)}>
+            <BtnSpace className="bothBtn" onClick={() => handleSwipe(1)}>
               <RightBtn />
             </BtnSpace>
           </ImgBtnSpace>
@@ -139,6 +146,8 @@ const ContentsSpace = styled.div`
   width: 100vw;
   height: 100vh;
   border: 1px solid blue;
+  position: relative;
+  overflow: hidden;
 `;
 const GrayBaground = styled.div`
   width: 100vw;
@@ -151,12 +160,10 @@ const GrayBaground = styled.div`
 const ImgBox = styled.div`
   display: flex;
   flex-direction: row;
-  border: 5px solid red;
   position: absolute;
   z-index: 1;
 `;
 const BannerImg = styled.img`
-  border: 1px solid blue;
   width: 100vw;
   height: 100vh;
 `;
@@ -219,8 +226,8 @@ const BtnSpace = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid transparent;
-  &:hover {
+  border: 2px solid transparent;
+  &.bothBtn:hover {
     border: 2px solid white;
     border-radius: 50%;
   }
@@ -236,6 +243,10 @@ const RightBtn = styled(BiChevronRight)`
   font-size: 30px;
 `;
 
+const PlayBtn = styled(BsPlayFill)`
+  font-size: 20px;
+  color: white;
+`;
 const ParseBtn = styled(IoMdPause)`
   font-size: 20px;
   color: white;
@@ -260,4 +271,4 @@ const ChangeNumber = styled.div`
   align-items: center;
   color: white;
 `;
-export default Contents;
+export default MainBannerContents;
