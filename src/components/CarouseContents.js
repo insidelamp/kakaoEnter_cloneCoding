@@ -39,62 +39,45 @@ const downImgArr = [
   downImg8,
 ];
 function CarouseContents() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [downCurrentIndex, setDownCurrentIndex] = useState(downImgArr.length);
   let upSlides = slidesFunc(upImgArr);
   let downSlides = slidesFunc(downImgArr);
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [downCurrentIndex, setDownCurrentIndex] = useState(downSlides.length);
   function slidesFunc(array) {
     let pushArr = []; // 뒤에 추가할 변수
     let unshiftArr = []; // 앞에 추가할 변수
     let index = 0; // 시작위치 설정
-    while (index < 2) {
+    while (index < array.length) {
       // index가 array의 길이보다 낮을경우 반복문을 돔
       pushArr.push(...array);
       // push변수에 push로 배열의
       unshiftArr.unshift(...array);
       index++;
     }
-    return [...pushArr, ...array, ...unshiftArr];
+    return [...unshiftArr, ...array, ...pushArr];
   }
   useEffect(() => {
     setTimeout(() => {
       setCurrentIndex(currentIndex + 1);
-      if (currentIndex === upSlides.length - 1) {
-        setCurrentIndex(0);
-      }
-    }, 1000);
+    }, 3000);
     setTimeout(() => {
       setDownCurrentIndex(downCurrentIndex - 1);
-      if (downCurrentIndex === 0) {
-        setDownCurrentIndex(downImgArr.length);
-      }
-    }, 1000);
+    }, 3000);
   }, [currentIndex]);
   console.log(downSlides);
   return (
     <Wrapper>
       <Title>기술과 서비스</Title>
       <CarouseWrapper>
-        <CarouseDisplay
-          style={{
-            transform: `translateX(${
-              -1 * ((100 / upImgArr.length) * currentIndex)
-            }%)`,
-          }}
-        >
-          {upSlides.map((img) => (
-            <ImgSpace src={img} />
+        <CarouseDisplay currentIndex={currentIndex}>
+          {upSlides.map((img, idx) => (
+            <ImgSpace key={idx} src={img} />
           ))}
         </CarouseDisplay>
-        <CarouseDisplay
-          style={{
-            transform: `translateX(${
-              -1 * ((100 / downImgArr.length) * downCurrentIndex)
-            }%)`,
-          }}
-        >
-          {downSlides.map((img) => (
-            <ImgSpace src={img} />
+        <CarouseDisplay downCurrentIndex={downCurrentIndex}>
+          {downSlides.map((img, idx) => (
+            <ImgSpace key={idx} src={img} />
           ))}
         </CarouseDisplay>
       </CarouseWrapper>
@@ -108,7 +91,7 @@ const Wrapper = styled.div`
 const Title = styled.div`
   margin: 5% 0 5% 10%;
 
-  font-size: 50px;
+  font-size: 60px;
   font-weight: bolder;
 `;
 const CarouseWrapper = styled.div`
@@ -119,6 +102,13 @@ const CarouseDisplay = styled.div`
   width: 100%;
   height: 50%;
   display: flex;
+  transform: ${(props) =>
+    props.downCurrentIndex
+      ? `translateX(${
+          -1 * ((100 / upImgArr.length) * props.downCurrentIndex)
+        }%)`
+      : `translateX(${-1 * ((100 / upImgArr.length) * props.currentIndex)}%)`};
+  transition: all linear 3s;
 `;
 
 const ImgSpace = styled.img`

@@ -4,7 +4,8 @@ import Menu from "./components/Menu";
 import InfinityContents from "./components/InfinityContents";
 import CarouseContents from "./components/CarouseContents";
 import Footer from "./components/Footer";
-
+import CustomerContents from "./components/CustomerContents";
+import BuinessContents from "./components/BuinessContents";
 import styled from "styled-components";
 
 function App() {
@@ -26,6 +27,8 @@ function App() {
       <MainBannerContents setHeaderState={setHeaderState} />
       <InfinityContents />
       <CarouseContents />
+      <CustomerContents />
+      <BuinessContents />
       <Footer />
     </Space>
   );
