@@ -43,6 +43,9 @@ function MainBannerContents() {
           <BannerImgContents>
             카카오 i 라스 70% 할인 받으세요!
           </BannerImgContents>
+          <BannerBtn href="https://kakaoenterprise.com/event/%EC%A4%91%EC%A7%84%EA%B3%B5-%EC%98%A8%EB%9D%BC%EC%9D%B8%EC%88%98%EC%B6%9C-%EA%B3%B5%EB%8F%99%EB%AC%BC%EB%A5%98%EC%82%AC%EC%97%85-%EC%B0%B8%EC%97%AC%EA%B8%B0%EC%97%85-%EB%AA%A8%EC%A7%91/">
+            자세히 보기
+          </BannerBtn>
         </>
       );
     } else if (currentIndex === 1) {
@@ -51,6 +54,9 @@ function MainBannerContents() {
           <BannerImgContents>안면인식.지능형CCTV 인증 획득</BannerImgContents>
           <br />
           <BannerImgContents>"AI로 보안 강화"</BannerImgContents>
+          <BannerBtn href="https://kakaoenterprise.com/press/%ec%95%88%eb%a9%b4%ec%9d%b8%ec%8b%9d%e2%ac%9d%ec%a7%80%eb%8a%a5%ed%98%95cctv-%ec%9d%b8%ec%a6%9d-%ed%9a%8d%eb%93%9dai%eb%a1%9c-%eb%b3%b4%ec%95%88-%ea%b0%95%ed%99%94/">
+            자세히 보기
+          </BannerBtn>
         </>
       );
     } else if (currentIndex === 2) {
@@ -61,6 +67,7 @@ function MainBannerContents() {
           <BannerImgContents>
             더 쉽고 편리해진 매칭 리뉴얼 오픈
           </BannerImgContents>
+          <BannerBtn href="https://kakaoilaas.com/">자세히 보기</BannerBtn>
         </>
       );
     } else if (currentIndex === 3) {
@@ -69,6 +76,9 @@ function MainBannerContents() {
           <BannerImgContents>KAKAO ENTERPRISE</BannerImgContents>
           <br />
           <BannerImgContents>AI REPORT 발간</BannerImgContents>
+          <BannerBtn href="https://kakaoenterprise.com/wp-content/uploads/2022/12/KEP_AI-REPORT_eBook.pdf">
+            자세히 보기
+          </BannerBtn>
         </>
       );
     } else if (currentIndex === 4) {
@@ -79,6 +89,9 @@ function MainBannerContents() {
           <BannerImgContents>
             우리는 카카오엔터프라이즈에서 일합니다
           </BannerImgContents>
+          <BannerBtn href="https://tech.kakaoenterprise.com/172">
+            자세히 보기
+          </BannerBtn>
         </>
       );
     }
@@ -114,7 +127,7 @@ function MainBannerContents() {
       <ContentsBannerImg>
         <InsideImgContents>
           {conentsDiv(currentIndex)}
-          <BannerBtn>자세히 보기</BannerBtn>
+
           <ImgBtnSpace>
             <BtnSpace className="bothBtn" onClick={() => handleSwipe(-1)}>
               <LeftBtn />
@@ -189,7 +202,7 @@ const BannerImgContents = styled.span`
   font-size: 75px;
   z-index: 3;
 `;
-const BannerBtn = styled.div`
+const BannerBtn = styled.a`
   cursor: pointer;
   width: 310px;
   height: 70px;
@@ -202,6 +215,7 @@ const BannerBtn = styled.div`
   font-size: 20px;
   margin-top: 50px;
   z-index: 3;
+  text-decoration: none;
   &:hover {
     color: black;
     background-color: #ffe100;

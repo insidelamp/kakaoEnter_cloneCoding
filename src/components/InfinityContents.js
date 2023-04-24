@@ -126,7 +126,7 @@ function InfinityContents() {
               <ContentsTitle>
                 <ContentsHover>{leftItem.title}</ContentsHover>
               </ContentsTitle>
-              <img src={leftItem.src} />
+              <CotentsImg src={leftItem.src} />
               <TagGrid>
                 {leftItem.contents.map((items, idx) => (
                   <TagDiv key={idx}>{items}</TagDiv>
@@ -149,7 +149,7 @@ function InfinityContents() {
               <ContentsTitle>
                 <ContentsHover>{rightItem.title}</ContentsHover>
               </ContentsTitle>
-              <img src={rightItem.src} />
+              <CotentsImg src={rightItem.src} />
               <TagGrid>
                 {rightItem.contents?.map((rightItems, idx) => (
                   <TagDiv key={idx}>{rightItems}</TagDiv>
@@ -175,16 +175,19 @@ const ContentsWrappper = styled.div`
   height: 70%;
   margin: auto;
   display: flex;
+  border: 1px solid red;
 `;
 
 const Contents = styled.div`
-  width: 90%;
+  width: 70%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border-bottom: 1px solid gray;
-  padding-bottom: 100px;
-  margin: 50px 0px;
+  padding-bottom: 50px;
+  margin: 50px auto;
+  border: 5px solid red;
   &.firstContent {
     border-bottom: 1px solid white;
   }
@@ -193,6 +196,7 @@ const ImgStyled = styled.img`
   width: 35%;
   height: 130px;
   display: ${(iconImg) => (iconImg.src !== undefined ? "block" : "none")};
+
   &.twoImg {
     width: 25%;
   }
@@ -213,6 +217,11 @@ const FlexImg = styled.div`
   &.flexTitile {
     height: 60px;
   }
+`;
+const CotentsImg = styled.img`
+  border-radius: 30px;
+  width: 100%;
+  height: 35vh;
 `;
 const LeftContents = styled.div`
   display: flex;
@@ -236,6 +245,8 @@ const ContentsTitle = styled.div`
 `;
 const ContentsHover = styled.div`
   border-bottom: 1px solid white;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
   &:hover {
     border-bottom: 1px solid gray;
   }
@@ -243,6 +254,8 @@ const ContentsHover = styled.div`
 const TagGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  border: 1px solid red;
   grid-gap: 5px;
   margin-top: 30px;
 `;

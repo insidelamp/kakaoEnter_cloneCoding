@@ -13,7 +13,7 @@ function CustomerContents() {
             <div>카카오엔터프라이즈는</div>
             <div>고객,파트너와 함께 성장하고 있습니다</div>
           </CutomeContents>
-          <CustomeBtnSpace>
+          <CustomeBtnSpace href="https://kakaoenterprise.com/case/">
             <CutomeBtn>고객사례 보기</CutomeBtn>
           </CustomeBtnSpace>
         </CustomeContentsSpace>
@@ -59,7 +59,7 @@ const CutomeContents = styled.div`
   font-size: 50px;
   font-weight: bolder;
 `;
-const CustomeBtnSpace = styled.div`
+const CustomeBtnSpace = styled.a`
   width: 18%;
   height: 13%;
   border-radius: 50px;
@@ -67,6 +67,7 @@ const CustomeBtnSpace = styled.div`
   justify-content: center;
   align-items: center;
   background-color: white;
+  text-decoration: none;
   &:hover {
     background-color: #ffe100;
     cursor: pointer;

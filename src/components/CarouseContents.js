@@ -65,7 +65,6 @@ function CarouseContents() {
       setDownCurrentIndex(downCurrentIndex - 1);
     }, 3000);
   }, [currentIndex]);
-  console.log(downSlides);
   return (
     <Wrapper>
       <Title>기술과 서비스</Title>
@@ -87,6 +86,7 @@ function CarouseContents() {
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
+  overflow: hidden;
 `;
 const Title = styled.div`
   margin: 5% 0 5% 10%;
