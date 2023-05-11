@@ -157,7 +157,6 @@ const FooterBtn = styled.div`
 const FooterInformation = styled.div`
   width: 100%;
   height: 20vh;
-  border: 1px solid violet;
   cursor: pointer;
 `;
 

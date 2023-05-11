@@ -175,7 +175,6 @@ const ContentsWrappper = styled.div`
   height: 70%;
   margin: auto;
   display: flex;
-  border: 1px solid red;
 `;
 
 const Contents = styled.div`
@@ -187,7 +186,6 @@ const Contents = styled.div`
   border-bottom: 1px solid gray;
   padding-bottom: 50px;
   margin: 50px auto;
-  border: 5px solid red;
   &.firstContent {
     border-bottom: 1px solid white;
   }
@@ -255,7 +253,6 @@ const TagGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   width: 100%;
-  border: 1px solid red;
   grid-gap: 5px;
   margin-top: 30px;
 `;

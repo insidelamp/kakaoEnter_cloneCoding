@@ -111,74 +111,99 @@ function MainBannerContents() {
     }
   }, [currentIndex, palseState]);
   return (
-    <ContentsSpace>
+    <Content>
       <GrayBaground />
-      <ImgBox
-        style={{
-          transform: `translateX(${
-            -1 * ((100 / bannerImgArr.length) * currentIndex)
-          }%)`,
-        }}
-      >
-        {bannerImgArr.map((images, idx) => (
-          <BannerImg src={images} key={idx} />
-        ))}
-      </ImgBox>
-      <ContentsBannerImg>
-        <InsideImgContents>
-          {conentsDiv(currentIndex)}
-
-          <ImgBtnSpace>
-            <BtnSpace className="bothBtn" onClick={() => handleSwipe(-1)}>
-              <LeftBtn />
-            </BtnSpace>
-            <ChangeSpace>
-              <ChangeNumber>{currentIndex + 1}</ChangeNumber>
-              <ChangeNumber>
-                <BsDot />
-              </ChangeNumber>
-              <ChangeNumber>{bannerImgArr.length}</ChangeNumber>
-              <BtnSpace>
-                {palseState ? (
-                  <PlayBtn onClick={handlePalse} />
-                ) : (
-                  <ParseBtn onClick={handlePalse} />
-                )}
+      <ContentsSpace>
+        <ImgBox
+          style={{
+            transform: `translateX(${
+              -1 * ((100 / bannerImgArr.length) * currentIndex)
+            }%)`,
+          }}
+        >
+          {bannerImgArr.map((images, idx) => (
+            <BannerImg src={images} key={idx} />
+          ))}
+        </ImgBox>
+        <ContentsBannerImg>
+          <InsideImgContents>
+            {conentsDiv(currentIndex)}
+            <ImgBtnSpace>
+              <BtnSpace className="bothBtn" onClick={() => handleSwipe(-1)}>
+                <LeftBtn />
               </BtnSpace>
-            </ChangeSpace>
-            <BtnSpace className="bothBtn" onClick={() => handleSwipe(1)}>
-              <RightBtn />
-            </BtnSpace>
-          </ImgBtnSpace>
-        </InsideImgContents>
-      </ContentsBannerImg>
-    </ContentsSpace>
+              <ChangeSpace>
+                <ChangeNumber>{currentIndex + 1}</ChangeNumber>
+                <ChangeNumber>
+                  <BsDot />
+                </ChangeNumber>
+                <ChangeNumber>{bannerImgArr.length}</ChangeNumber>
+                <BtnSpace>
+                  {palseState ? (
+                    <StartBtn onClick={handlePalse} />
+                  ) : (
+                    <ParseBtn onClick={handlePalse} />
+                  )}
+                </BtnSpace>
+              </ChangeSpace>
+              <BtnSpace className="bothBtn" onClick={() => handleSwipe(1)}>
+                <RightBtn />
+              </BtnSpace>
+            </ImgBtnSpace>
+          </InsideImgContents>
+        </ContentsBannerImg>
+      </ContentsSpace>
+    </Content>
   );
 }
+const Content = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 const ContentsSpace = styled.div`
   width: 100vw;
   height: 100vh;
-  border: 1px solid blue;
   position: relative;
   overflow: hidden;
+  @media screen and (max-width: 1400px) {
+    width: 100vw;
+    height: auto;
+  }
+  @media screen and (max-width: 540px) {
+    width: 100vw;
+  }
 `;
 const GrayBaground = styled.div`
-  width: 100vw;
-  height: 105vh;
+  width: 100%;
+  height: 100%;
   z-index: 2;
   background-color: #545454;
   position: absolute;
   opacity: 0.3;
+  background-size: cover;
+  display: none;
 `;
 const ImgBox = styled.div`
   display: flex;
   flex-direction: row;
   position: absolute;
   z-index: 1;
+  background-size: 100%;
 `;
 const BannerImg = styled.img`
   width: 100vw;
   height: 100vh;
+  background-size: contain;
+
+  @media screen and (max-width: 1400px) {
+    width: 100vw;
+    height: auto;
+    min-height: 50vh;
+  }
+  @media screen and (max-width: 540px) {
+    width: 100vw;
+    height: 50vh;
+  }
 `;
 
 const ContentsBannerImg = styled.div`
@@ -186,25 +211,34 @@ const ContentsBannerImg = styled.div`
   height: 106vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+  z-index: 20;
+  @media screen and (max-width: 1400px) {
+    width: 100vw;
+    height: auto;
+    max-height: 50%;
+    padding-top: 200px;
+  }
 `;
 const InsideImgContents = styled.div`
   width: 80%;
-  height: 30%;
-  border: 1px solid blue;
-  margin-top: 50px;
+  height: 60%;
+  margin-top: 70px;
   display: flex;
   font-weight: 700;
   flex-direction: column;
+  position: relative;
+  z-index: 50;
+  margin-bottom: 30px;
 `;
 const BannerImgContents = styled.span`
   color: white;
-  font-size: 75px;
+  font-size: 3vw;
   z-index: 3;
 `;
 const BannerBtn = styled.a`
   cursor: pointer;
-  width: 310px;
+  width: 15%;
   height: 70px;
   border: 4px solid white;
   border-radius: 40px;
@@ -212,7 +246,7 @@ const BannerBtn = styled.a`
   justify-content: center;
   align-items: center;
   color: white;
-  font-size: 20px;
+  font-size: 0.9vw;
   margin-top: 50px;
   z-index: 3;
   text-decoration: none;
@@ -229,10 +263,14 @@ const ImgBtnSpace = styled.div`
   align-items: center;
   position: absolute;
   font-size: 30px;
-  bottom: 30px;
+  bottom: 0px;
   left: 43%;
   z-index: 3;
   margin-bottom: 50px;
+
+  @media screen and (max-width: 1400px) {
+    bottom: -70px;
+  }
 `;
 const BtnSpace = styled.div`
   width: 70px;
@@ -250,11 +288,13 @@ const LeftBtn = styled(BiChevronLeft)`
   color: white;
   font-size: 30px;
   font-weight: bold;
+  cursor: pointer;
 `;
 
 const RightBtn = styled(BiChevronRight)`
   color: white;
   font-size: 30px;
+  cursor: pointer;
 `;
 
 const PlayBtn = styled(BsPlayFill)`
@@ -264,9 +304,11 @@ const PlayBtn = styled(BsPlayFill)`
 const ParseBtn = styled(IoMdPause)`
   font-size: 20px;
   color: white;
+  cursor: pointer;
 `;
 const StartBtn = styled(BsCaretRightFill)`
   color: white;
+  cursor: pointer;
 `;
 
 const ChangeSpace = styled.div`

@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { TbArrowUpRight } from "react-icons/tb";
+import { IoMdMenu } from "react-icons/io";
 import { LogoImg } from "../Img/thumb-default.jpg";
 
 function Menu({ headerState, setHeaderState, scrollPosition }) {
+  const [width, setWidth] = useState(0);
+  const handleWindowResize = () => {
+    setWidth(window.innerWidth);
+  };
   const onHoverDisplay = () => {
     setHeaderState(true);
   };
   const offHoverDisplay = () => {
     setHeaderState(false);
   };
+  useEffect(() => {
+    handleWindowResize();
+    window.addEventListener("resize", handleWindowResize);
+    return () => window.removeEventListener("resize", handleWindowResize);
+  }, [width]);
   return (
     <Space
       headerState={headerState}
@@ -72,7 +82,13 @@ function Menu({ headerState, setHeaderState, scrollPosition }) {
           headerState={headerState}
           scrollPosition={scrollPosition}
         >
-          <div>인재영입</div>
+          {width > 1400 ? (
+            <div>인재영입</div>
+          ) : (
+            <SmallMenu>
+              <IoMdMenu />
+            </SmallMenu>
+          )}
           <EmploymentArrowSpace>
             <EmploymentArrow />
           </EmploymentArrowSpace>
@@ -82,15 +98,14 @@ function Menu({ headerState, setHeaderState, scrollPosition }) {
   );
 }
 const Space = styled.div`
-  width: 100%;
-  height: 10vh;
+  width: 100vw;
+  height: 10%;
   display: flex;
   justify-content: center;
   position: fixed;
   z-index: 4;
   background-color: ${(props) =>
     props.headerState || props.scrollPosition > 100 ? "white" : "transparent"};
-  // 프롭스로 상태값 받아서 하얀색으로 변화
 `;
 
 const MenuSpace = styled.div`
@@ -105,14 +120,20 @@ const MenuLogo = styled.div`
   align-items: center;
   width: 12%;
   cursor: pointer;
+  @media screen and (max-width: 1400px) {
+    width: 30%;
+  }
 `;
 const Logo = styled.span`
-  font-size: 25px;
+  font-size: 1.1vw;
   font-weight: 300;
   color: ${(props) =>
     props.headerState || props.scrollPosition > 100 ? "black" : "white"};
   &.logoBold {
     font-weight: bolder;
+  }
+  @media screen and (max-width: 1400px) {
+    font-size: 2vw;
   }
 `;
 
@@ -122,26 +143,34 @@ const MenuInteraction = styled.div`
   justify-content: center;
   width: 70%;
   cursor: pointer;
+  @media screen and (max-width: 1400px) {
+    display: none;
+  }
 `;
 
 const MenuContents = styled.div`
   color: ${(props) =>
     props.headerState || props.scrollPosition > 100 ? "black" : "white"};
   width: 12%;
-  font-size: 22px;
+  font-size: 0.9vw;
   font-weight: bold;
+  text-size-adjust: auto;
 `;
 
 const MenuEmployment = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 0.9vw;
   font-weight: bold;
   color: ${(props) =>
     props.headerState || props.scrollPosition > 100 ? "black" : "white"};
-  width: 10%;
+  width: 200px;
   cursor: pointer;
+  text-size-adjust: auto;
+  @media screen and (max-width: 1400px) {
+    font-size: 1.3vw;
+  }
 `;
 
 const EmploymentArrowSpace = styled.div`
@@ -156,6 +185,9 @@ const EmploymentArrowSpace = styled.div`
   &:hover {
     background-color: yellow;
   }
+  @media screen and (max-width: 1400px) {
+    display: none;
+  }
 `;
 const moveArrow = keyframes`
     from {
@@ -164,6 +196,13 @@ const moveArrow = keyframes`
     to {
       transform: translate(0px, 0px);
     }
+`;
+const SmallMenu = styled.div`
+  width: 50px;
+  height: 50px;
+  font-size: 5vw;
+  @media screen and (max-width: 1400px) {
+  }
 `;
 const EmploymentArrow = styled(TbArrowUpRight)`
   color: gray;
